@@ -2,11 +2,14 @@ package com.sb.interview.controller;
 
 
 import java.util.Collection;
+import java.util.concurrent.Future;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,10 +48,19 @@ public class BookController {
 		return "book added : " + book.getId();
 	}
 	
+	
+	@SuppressWarnings("deprecation")
 	@PostMapping(path="/books", produces= MediaType.APPLICATION_JSON_VALUE)
-	public String addAllBook(@RequestBody Book[] books) {
+	public Future<String> addAllBook(@RequestBody Book[] books) {
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		service.addAllBooks(books);
-		return "books are added";
+		return new AsyncResult<String>("books are added");
 	}
 	
 	@DeleteMapping(path="/book/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -59,4 +71,6 @@ public class BookController {
 		}
 		return new ResponseEntity<Book>(HttpStatus.NO_CONTENT);
 	}
+	
+	
 }

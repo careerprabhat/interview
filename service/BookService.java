@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.sb.interview.pojo.Book;
@@ -31,6 +32,7 @@ public class BookService {
 		return map.values();
 	}
 	
+	@Async
 	public void addAllBooks(Book[] books) {
 		for(Book book:books) {
 			map.put(book.getId(), book);
