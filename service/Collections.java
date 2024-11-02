@@ -146,5 +146,4 @@ public class Collections<T> implements List<Book> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

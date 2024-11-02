@@ -71,6 +71,4 @@ public class BookController {
 		}
 		return new ResponseEntity<Book>(HttpStatus.NO_CONTENT);
 	}
-	
-	
 }
